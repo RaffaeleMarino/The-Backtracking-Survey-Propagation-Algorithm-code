@@ -7,5 +7,9 @@ If you want a faster version of this code please send an email to : raffaele.mar
 
 For any problem send an email : marinoraffaele.nunziatella@gmail.com
 
+# Compilation
 
-
+To compile the code:
+```
+g++ -Ofast *.cpp -o main.x
+```

@@ -85,8 +85,7 @@
 #include <iostream>
 #include <fstream>
 #include "random.h"
-using namespace std;
-int WalkSat(vector <vector<bool> > & sol,int argc, char * argv[]);
+int WalkSat(std::vector <std::vector<bool> > & sol,int argc, char * argv[]);
 
 #define NT 
 
@@ -364,17 +363,17 @@ void print_statistics_header(void);
 void initialize_statistics(void);
 void update_statistics_start_try(void);
 void print_statistics_start_flip(void);
-void update_and_print_statistics_end_try(vector <vector<bool> > & sol);
+void update_and_print_statistics_end_try(std::vector <std::vector<bool> > & sol);
 void update_statistics_end_flip(void);
 void print_statistics_final();
-void print_sol_cnf(vector <bool> & sol);
+void print_sol_cnf(std::vector <bool> & sol);
 
 /************************************/
 /* Main                             */
 /************************************/
 
 
-int WalkSat(vector <vector<bool> > & sol,int argc, char * argv[])
+int WalkSat(std::vector <std::vector<bool> > & sol,int argc, char * argv[])
 {
 	
 	parse_parameters(argc, argv); 
@@ -633,7 +632,7 @@ void print_statistics_start_flip(void)
 } 
 
 
-void update_and_print_statistics_end_try(vector <vector<bool> > & sol)
+void update_and_print_statistics_end_try(std::vector <std::vector<bool> > & sol)
 {
     int i;
     int j;
@@ -676,7 +675,7 @@ void update_and_print_statistics_end_try(vector <vector<bool> > & sol)
     if(numfalse == 0){
 		
 		save_solution();
-		vector <bool> next;
+    std::vector <bool> next;
 		print_sol_cnf( next);
 		sol.push_back(next);
 		numsuccesstry++;
@@ -1150,11 +1149,11 @@ void flipatom(int toflip)
 {
     int i, j;			/* loop counter */
     int toenforce;		/* literal to enforce */
-    register int cli;
-    register int lit;
+    int cli;
+    int lit;
     int numocc;
-    register int sz;
-    register int * litptr;
+    int sz;
+    int * litptr;
     int * occptr;
 	
     /* printf("flipping %i\n", toflip); */
@@ -1282,9 +1281,9 @@ int pickbest(void)
     int clausesize;
     int i;		
     int best[MAXLENGTH];	/* best possibility so far */
-    register int numbest;	/* how many are tied for best */
-    register int bestvalue;	/* best value so far */
-    register int var;
+    int numbest;	/* how many are tied for best */
+    int bestvalue;	/* best value so far */
+    int var;
 	FRAND
     tofix = fals[Random()%numfalse];
 	clausesize = size[tofix];
@@ -1494,9 +1493,9 @@ double elapsed_seconds(void)
 }
 #endif
 
-void print_sol_cnf(vector<bool> & sol)
+void print_sol_cnf(std::vector<bool> & sol)
 {   
-	static ofstream outfile("outfile");
+	static std::ofstream outfile("outfile");
     int i;
     sol.resize(numatom);
     for(i = 1;i < numatom+1;i++){
@@ -1504,7 +1503,7 @@ void print_sol_cnf(vector<bool> & sol)
 		outfile <<(solution[i] == 1 ? true : false)  <<" ";
 		sol[i-1]=solution[i] == 1 ? true : false;
 	}
-	outfile<<endl;
+	outfile<<std::endl;
 }
 
 void
